@@ -1,6 +1,6 @@
 import { WeatherData, DailyForecast, RainChance } from "../types";
 
-const API_KEY = "419a17a1e5054f5d37e144dc61c88e07";
+const API_KEY = "YOUR_API_KEY_FROM_OPENWEATHER";
 
 // Dados de fallback em caso de falha na API
 const FALLBACK_DATA: WeatherData = {
