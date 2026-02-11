@@ -1,20 +1,65 @@
-<div align="center">
-<img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
-</div>
+🌦️ Clima Já
 
-# Run and deploy your AI Studio app
+Aplicação web desenvolvida em React + TypeScript que permite consultar o clima atual da sua localização ou de qualquer cidade informada pelo usuário.
 
-This contains everything you need to run your app locally.
+🔗 Repositório: https://github.com/UmTioAii/Clima_J-
 
-View your app in AI Studio: https://ai.studio/apps/drive/1ZILPlBiwHbhivYiOupDQEXW5BDft1_Uu
+📌 Sobre o Projeto
 
-## Run Locally
+O Clima Já é uma aplicação simples e intuitiva para consulta de informações climáticas em tempo real. O usuário pode:
 
-**Prerequisites:**  Node.js
+📍 Ver o clima da sua localização atual (via geolocalização)
 
+🔎 Buscar o clima de qualquer cidade digitando o nome
 
-1. Install dependencies:
-   `npm install`
-2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
-3. Run the app:
-   `npm run dev`
+🌡️ Visualizar temperatura, condição do tempo e outras informações relevantes
+
+O projeto foi desenvolvido com foco em:
+
+Componentização
+
+Tipagem forte com TypeScript
+
+Organização de código
+
+Consumo de API externa de clima
+
+🚀 Tecnologias Utilizadas
+
+⚛️ React
+
+🟦 TypeScript
+
+🌐 API de Clima (OpenWeather)
+
+📷 Funcionalidades
+
+✔️ Busca por cidade
+
+✔️ Geolocalização automática
+
+✔️ Exibição de temperatura
+
+✔️ Exibição da condição climática
+
+✔️ Interface simples e responsiva
+
+📁 Estrutura do Projeto (Exemplo) src/ ├── components/ ├── pages/ ├── services/ ├── types/ ├── App.tsx └── main.tsx
+
+📦 Deploy
+
+Você pode realizar o deploy em plataformas como:
+
+Vercel
+
+Netlify
+
+GitHub Pages
+
+🤝 Contribuição
+
+Sinta-se à vontade para abrir issues ou enviar pull requests com melhorias.
+
+👨‍💻 Autor
+
+Desenvolvido por UmTioAii
