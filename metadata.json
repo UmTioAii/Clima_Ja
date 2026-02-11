@@ -1,0 +1,7 @@
+{
+  "name": "Clima Já",
+  "description": "A modern, dark-themed weather dashboard providing real-time updates and forecasts.",
+  "requestFramePermissions": [
+    "geolocation"
+  ]
+}
