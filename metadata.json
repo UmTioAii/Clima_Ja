@@ -1,6 +1,6 @@
 {
   "name": "Clima Já",
-  "description": "A modern, dark-themed weather dashboard providing real-time updates and forecasts.",
+  "description": "Um painel de clima moderno e escuro fornecendo atualizações em tempo real e previsões.",
   "requestFramePermissions": [
     "geolocation"
   ]

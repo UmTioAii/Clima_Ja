@@ -9,7 +9,7 @@ const App: React.FC = () => {
   const [weather, setWeather] = useState<WeatherData | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const [searchQuery, setSearchQuery] = useState<string>('');
-  const [activeCity, setActiveCity] = useState<string>('San Francisco');
+  const [activeCity, setActiveCity] = useState<string>('São Paulo');
 
   const loadWeather = useCallback(async (city: string) => {
     setLoading(true);
@@ -19,22 +19,20 @@ const App: React.FC = () => {
   }, []);
 
   useEffect(() => {
-    // Attempt to get user location on load, else fallback to San Francisco
+    // Tenta obter localização do usuário, senão usa padrão
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
         async (position) => {
-          // In a real app, we'd reverse geocode here. 
-          // For this demo, we'll let Gemini know to find local weather if we passed coords,
-          // but sticking to the request's visual, we start with a default or searched city.
-          // Let's stick to the visual default of "San Francisco" unless searched.
-          loadWeather("San Francisco"); 
+          // Em um app real, faríamos reverse geocoding.
+          // Aqui mantemos o padrão visual solicitado, iniciando com São Paulo se não buscar.
+          loadWeather("São Paulo"); 
         },
         (error) => {
-          loadWeather("San Francisco");
+          loadWeather("São Paulo");
         }
       );
     } else {
-      loadWeather("San Francisco");
+      loadWeather("São Paulo");
     }
   }, [loadWeather]);
 
@@ -54,11 +52,13 @@ const App: React.FC = () => {
     );
   }
 
-  // Fallback if load fails completely (shouldn't happen due to service fallback)
   if (!weather) return null;
 
   const today = new Date();
-  const dateString = today.toLocaleDateString('en-US', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' });
+  // Formatação de data em Português
+  const dateString = today.toLocaleDateString('pt-BR', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' });
+  // Capitalizar a primeira letra da data (opcional, pois pt-BR retorna minúsculas)
+  const formattedDateString = dateString.charAt(0).toUpperCase() + dateString.slice(1);
 
   return (
     <div className="min-h-screen bg-app-bg text-app-text p-4 md:p-8 font-sans selection:bg-blue-500/30">
@@ -78,7 +78,7 @@ const App: React.FC = () => {
           <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 group-focus-within:text-blue-400 transition-colors" size={20} />
           <input
             type="text"
-            placeholder="Search for cities (e.g. San Francisco, Tokyo)..."
+            placeholder="Buscar cidade (ex: São Paulo, Rio de Janeiro)..."
             className="w-full bg-[#1C2533] border border-transparent focus:border-blue-500/50 rounded-2xl py-3 pl-12 pr-4 text-gray-200 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500/20 transition-all"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
@@ -107,10 +107,10 @@ const App: React.FC = () => {
             <div className="flex justify-between items-start mb-12 relative z-10">
               <div>
                 <h2 className="text-3xl md:text-4xl font-bold text-white mb-2">{weather.city}, {weather.countryCode}</h2>
-                <p className="text-gray-400">{dateString} | {weather.lastUpdated}</p>
+                <p className="text-gray-400">{formattedDateString} | {weather.lastUpdated}</p>
               </div>
               <div className="bg-blue-600/20 text-blue-400 text-xs font-semibold px-4 py-1.5 rounded-full border border-blue-500/20 animate-pulse">
-                Live Updates
+                Ao Vivo
               </div>
             </div>
 
@@ -123,7 +123,7 @@ const App: React.FC = () => {
                     <WeatherIcon type={weather.condition} size={48} />
                  </div>
                  <span className="text-2xl font-medium text-white mb-1">{weather.condition}</span>
-                 <span className="text-gray-400">Feels like {Math.round(weather.feelsLike)}° • H: {Math.round(weather.high)}° L: {Math.round(weather.low)}°</span>
+                 <span className="text-gray-400">Sensação {Math.round(weather.feelsLike)}° • Máx: {Math.round(weather.high)}° Mín: {Math.round(weather.low)}°</span>
               </div>
             </div>
           </div>
@@ -131,26 +131,26 @@ const App: React.FC = () => {
           {/* Stats Grid */}
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             <StatCard 
-              label="Wind Speed" 
+              label="Vento" 
               value={`${weather.windSpeed} km/h`} 
               Icon={Wind} 
               iconColor="text-blue-400"
             />
             <StatCard 
-              label="Humidity" 
+              label="Umidade" 
               value={`${weather.humidity}%`} 
               Icon={Droplets} 
               iconColor="text-cyan-400"
             />
             <StatCard 
-              label="UV Index" 
+              label="Índice UV" 
               value={`${weather.uvIndex}`} 
               subValue={weather.uvLevel}
               Icon={SunDim} 
               iconColor="text-yellow-400"
             />
             <StatCard 
-              label="Visibility" 
+              label="Visibilidade" 
               value={`${weather.visibility} km`} 
               Icon={Eye} 
               iconColor="text-purple-400"
@@ -165,14 +165,12 @@ const App: React.FC = () => {
           <div className="bg-app-card rounded-[32px] p-0 overflow-hidden relative h-64 border border-white/5 group shadow-lg">
              {/* Simulating a dark map style */}
              <div className="absolute inset-0 bg-[#162032] opacity-100">
-                {/* Abstract Map Lines - CSS Drawing for aesthetics */}
                 <div className="absolute w-full h-full opacity-20" 
                      style={{
                         backgroundImage: 'radial-gradient(circle, #3B82F6 1px, transparent 1px)',
                         backgroundSize: '20px 20px'
                      }}>
                 </div>
-                {/* Streets/Lines simulation */}
                 <svg className="absolute inset-0 w-full h-full stroke-gray-600 opacity-20" strokeWidth="1">
                    <path fill="none" d="M0,50 Q100,100 200,50 T400,100" />
                    <path fill="none" d="M50,0 Q100,100 50,200 T100,400" />
@@ -185,7 +183,7 @@ const App: React.FC = () => {
              <div className="absolute top-0 left-0 p-6 w-full h-full flex flex-col justify-between z-10 bg-gradient-to-t from-black/60 to-transparent">
                <div></div>
                <div className="flex justify-between items-end">
-                 <span className="font-semibold text-white">Weather Radar</span>
+                 <span className="font-semibold text-white">Radar Meteorológico</span>
                  <button className="bg-blue-600 hover:bg-blue-500 text-white p-2 rounded-full transition-transform transform group-hover:scale-110">
                    <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
                      <path fillRule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clipRule="evenodd" />
@@ -203,7 +201,7 @@ const App: React.FC = () => {
                   <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clipRule="evenodd" />
                 </svg>
               </div>
-              <h3 className="font-semibold text-white">Chance of Rain</h3>
+              <h3 className="font-semibold text-white">Probabilidade de Chuva</h3>
             </div>
 
             <div className="space-y-6">
@@ -229,7 +227,7 @@ const App: React.FC = () => {
 
       {/* 7-Day Forecast */}
       <div>
-        <h3 className="text-xl font-bold text-white mb-6">7-Day Forecast</h3>
+        <h3 className="text-xl font-bold text-white mb-6">Previsão Semanal</h3>
         <div className="flex flex-wrap md:flex-nowrap gap-4 overflow-x-auto pb-4">
           {weather.dailyForecast.map((day, index) => (
             <ForecastCard 
