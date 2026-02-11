@@ -44,18 +44,6 @@ Consumo de API externa de clima
 
 ✔️ Interface simples e responsiva
 
-📁 Estrutura do Projeto (Exemplo) src/ ├── components/ ├── pages/ ├── services/ ├── types/ ├── App.tsx └── main.tsx
-
-📦 Deploy
-
-Você pode realizar o deploy em plataformas como:
-
-Vercel
-
-Netlify
-
-GitHub Pages
-
 🤝 Contribuição
 
 Sinta-se à vontade para abrir issues ou enviar pull requests com melhorias.
