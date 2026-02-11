@@ -2,7 +2,7 @@
 
 Aplicação web desenvolvida em React + TypeScript que permite consultar o clima atual da sua localização ou de qualquer cidade informada pelo usuário.
 
-🔗 Repositório: https://github.com/UmTioAii/Clima_J-
+🔗 Repositório: https://github.com/UmTioAii/Clima_Ja
 
 📌 Sobre o Projeto
 
